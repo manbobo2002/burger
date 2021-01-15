@@ -20,9 +20,7 @@ pipeline {
 
         stage("deploy") {
             steps{
-                nodejs('Node-15.6.0'){
-                    sh 'npm start'
-                }
+                echo 'deploy the app'
             }
         }
     }
