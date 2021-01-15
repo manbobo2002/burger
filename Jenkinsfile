@@ -1,18 +1,17 @@
 pipeline {
-    agent any
-    stages {
-        stage("run frontend") {
-            steps {
-                echo 'executing....'
-                nodejs('Node-15.6.0') {
-                    sh 'npm install'
-                }
-            }
+    agent {
+        docker {
+            image 'node:6-alpine'
+            args '-p 3000:3000'
         }
+    }
+    environment { 
+        CI = 'true'
+    }
+    stages {
         stage("build") {
             steps {
-                echo 'building the app....'
-                echo 'building the app'
+                sh 'npm install'
             }
         }
 
@@ -24,7 +23,7 @@ pipeline {
 
         stage("deploy") {
             steps{
-                echo 'deploy the app'
+                sh 'npm start'
             }
         }
     }
