@@ -6,7 +6,9 @@ pipeline {
     stages {
         stage("build") {
             steps {
-                sh 'npm install'
+                nodejs('Node-15.6.0'){
+                    sh 'npm install'
+                }
             }
         }
 
@@ -18,7 +20,9 @@ pipeline {
 
         stage("deploy") {
             steps{
-                sh 'npm start'
+                nodejs('Node-15.6.0'){
+                    sh 'npm start'
+                }
             }
         }
     }
